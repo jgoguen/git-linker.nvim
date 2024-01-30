@@ -1,0 +1,39 @@
+*git-linker.nvim*
+
+git-linker.nvim - Generate web links to files in a git repository
+
+================================================================================
+CONTENTS                                              *git-linker.nvim-contents*
+
+  1. Introduction................................|git-linker.nvim-introduction|
+  2. Configuration...............................|git-linker.nvim-config|
+	3. Commands....................................|git-linker.nvim-commands|
+	4. Supported remotes...........................|git-linker.nvim-remotes|
+
+================================================================================
+1. Introduction                                   *git-linker.nvim-introduction*
+
+git-linker.nvim provides a command to generate a URL for the current file in
+a git repository linking to the current file and line number. If a range is
+provided, the URL will link to the selected line numbers.
+
+================================================================================
+2. Configuration                                        *git-linker.nvim-config*
+
+git-linker.nvim does not have any configuration options exposed.
+
+================================================================================
+3. Commands                                           *git-linker.nvim-commands*
+
+GitLink                                                                *GitLink*
+
+  Generate a URL to the web view for the current file and line. If a range is
+	given, generate a URL linking to that line range instead.
+
+================================================================================
+4. Supported remotes                                   *git-linker.nvim-remotes*
+
+git-linker.nvim currently has support for generating links to the following git
+web providers:
+
+- GitHub
