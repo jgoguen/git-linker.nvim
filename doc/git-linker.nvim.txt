@@ -28,7 +28,8 @@ git-linker.nvim does not have any configuration options exposed.
 GitLink                                                                *GitLink*
 
   Generate a URL to the web view for the current file and line. If a range is
-	given, generate a URL linking to that line range instead.
+	given, generate a URL linking to that line range instead. The URL will be
+	printed and copied to the system clipboard.
 
 ================================================================================
 4. Supported remotes                                   *git-linker.nvim-remotes*
