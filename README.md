@@ -28,6 +28,10 @@ return {
 }
 ```
 
+Your Neovim configuration should, after this plugin is loaded, call
+`:helptags ALL`. This will make help available with `:help git-linker.nvim` or
+`:help GitLink`.
+
 # Configuration
 
 git-linker.nvim comes with the following defaults:
