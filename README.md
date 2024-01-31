@@ -22,9 +22,40 @@ Installation with [lazy.nvim](https://github.com/folke/lazy.nvim) is supported:
 ```lua
 return {
   url = 'https://codeberg.org/jgoguen/git-linker.nvim',
+  opts = {
+    print_url = false,
+  }
 }
 ```
 
 # Configuration
 
-No configuration options are available at this time.
+git-linker.nvim comes with the following defaults:
+
+```lua
+{
+  copy_to_clipboard = true,
+  fallback_branch = nil,
+  fallback_url_format = nil,
+  print_url = true,
+}
+```
+
+Any of these may be overridden by passing them to `setup()`.
+
+- `copy_to_clipboard`: If this is `true`, the generated URL will be copied to
+  the system clipboard (via the `+` register).
+- `fallback_branch`: If this is not `nil`, this branch will be used to resolve
+  the commit hash if the current branch has not been pushed to origin. This is
+  useful if your main upstream branch is something other than `main` or `master`,
+  such as `dev`.
+- `fallback_url_format`: If this is not `nil`, and a URL format isn't found from
+  the git remote URL, use this as the URL format string. It may be an index into
+  `config.formats`, or a format string. If a format string is given, there must
+  be four parameters:
+  - The host and base path (e.g. `github.com/user/repo`)
+  - The commit hash
+  - The file path relative to the repo root (e.g. `doc/README.md`)
+  - The line number(s) (e.g. `L10` or `L10-L15`)
+- `print_url`: If this is `true`, the generated URL will be printed. This will
+  cause a vim message to be displayed

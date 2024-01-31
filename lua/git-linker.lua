@@ -1,3 +1,4 @@
+local config = require("git-linker.config")
 local util = require("git-linker.util")
 local M = {}
 
@@ -30,17 +31,35 @@ function M.getLink(start_line, end_line)
 		end
 	end
 
-	local url_format = ""
+	---@type string|nil
+	local url_format = nil
 	if string.find(url, "github.com") then
 		url_format = util.formats.github
 	elseif string.find(url, "codeberg.org") then
 		url_format = util.formats.codeberg
+	elseif config.options.fallback_url_format ~= nil then
+		local fmt = util.formats[config.options.fallback_url_format]
+		if fmt ~= nil then
+			url_format = fmt
+		else
+			url_format = config.options.fallback_url_format
+		end
 	end
+	assert(url_format, "No URL format found")
 
 	url = string.format(url_format, url, commit, relative_file, line_numbers)
 
-	vim.fn.setreg("+", url)
-	print(url)
+	if config.options.copy_to_clipboard then
+		vim.fn.setreg("+", url)
+	end
+
+	if config.options.print_url then
+		print(url)
+	end
+end
+
+function M.setup(opts)
+	config.setup(opts)
 end
 
 return M

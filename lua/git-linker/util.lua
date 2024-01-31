@@ -1,3 +1,4 @@
+local config = require("git-linker.config")
 local M = {
 	formats = {
 		github = "https://%s/blob/%s/%s#%s",
@@ -19,6 +20,11 @@ function M.get_upstream_commit()
 	local root_dir = io.popen("git rev-parse --show-toplevel"):read()
 	local f = io.open(root_dir .. "/.git/refs/remotes/origin/" .. current_branch, "r")
 	if not f then
+		-- If we have a fallback branch, check for it
+		if config.options.fallback_branch ~= nil then
+			f = io.open(root_dir .. "/.git/refs/remotes/origin/" .. config.options.fallback_branch, "r")
+		end
+
 		-- No? OK, check for main.
 		f = io.open(root_dir .. "/.git/refs/remotes/origin/main", "r")
 		if not f then

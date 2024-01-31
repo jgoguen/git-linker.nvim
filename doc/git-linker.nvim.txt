@@ -7,8 +7,8 @@ CONTENTS                                              *git-linker.nvim-contents*
 
   1. Introduction................................|git-linker.nvim-introduction|
   2. Configuration...............................|git-linker.nvim-config|
-	3. Commands....................................|git-linker.nvim-commands|
-	4. Supported remotes...........................|git-linker.nvim-remotes|
+  3. Commands....................................|git-linker.nvim-commands|
+  4. Supported remotes...........................|git-linker.nvim-remotes|
 
 ================================================================================
 1. Introduction                                   *git-linker.nvim-introduction*
@@ -20,7 +20,37 @@ provided, the URL will link to the selected line numbers.
 ================================================================================
 2. Configuration                                        *git-linker.nvim-config*
 
-git-linker.nvim does not have any configuration options exposed.
+git-linker.nvim exposes the following configuration options which may be passed
+to the Lua setup() function:
+
+                                                             *copy_to_clipboard*
+copy_to_clipboard: true|false    If this is true, the generated URL will be
+                                 copied to the + register for the system
+                                 clipboard. Default: true
+
+                                                               *fallback_branch*
+fallback_branch: string|nil      If this is not nil, this branch name will be
+                                 used to resolve the commit hash if the current
+                                 branch has not been pushed to origin. This is
+                                 useful if your main upstream branch is
+                                 something other than main or master, such as
+                                 dev. Default: nil
+
+                                                           *fallback_url_format*
+fallback_url_format: string|nil  If this is not nil, and a URL format isn't
+                                 found based on the git remote URL, use this as
+                                 the URL format string. This may be an index
+                                 into the config.formats table or a format
+                                 string. If a format string is used, it must
+                                 have placeholders for the host and user/repo
+                                 path (e.g. github.com/user/repo), commit hash,
+                                 file path relative to the repo (e.g.
+                                 doc/README.md), and line numbers (e.g. L10 or
+                                 L23-L29). Default: nil
+
+                                                                     *print_url*
+print_url: bool                  If this is true, the generated URL will be
+                                 printed as a vim message. Default: true
 
 ================================================================================
 3. Commands                                           *git-linker.nvim-commands*
@@ -28,8 +58,8 @@ git-linker.nvim does not have any configuration options exposed.
 GitLink                                                                *GitLink*
 
   Generate a URL to the web view for the current file and line. If a range is
-	given, generate a URL linking to that line range instead. The URL will be
-	printed and copied to the system clipboard.
+  given, generate a URL linking to that line range instead. The URL will be
+  printed and copied to the system clipboard.
 
 ================================================================================
 4. Supported remotes                                   *git-linker.nvim-remotes*
@@ -38,3 +68,4 @@ git-linker.nvim currently has support for generating links to the following git
 web providers:
 
 - GitHub
+- Codeberg
