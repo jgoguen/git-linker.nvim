@@ -1,3 +1,4 @@
+local util = require("git-linker.util")
 local M = {}
 
 function M.getLink(start_line, end_line)
@@ -8,7 +9,8 @@ function M.getLink(start_line, end_line)
 	local root_dir = io.popen("git rev-parse --show-toplevel"):read()
 
 	-- Current commit
-	local commit = io.popen("git rev-parse HEAD"):read()
+	local commit = util.get_upstream_commit()
+	assert(commit, "No origin commit found")
 
 	-- Relative path to file
 	local current_file = vim.fn.expand("%:p")
