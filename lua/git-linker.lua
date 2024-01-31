@@ -30,9 +30,16 @@ function M.getLink(start_line, end_line)
 		end
 	end
 
-	url = string.format("https://%s/blob/%s/%s#%s", url, commit, relative_file, line_numbers)
+	local url_format = ""
+	if string.find(url, "github.com") then
+		url_format = util.formats.github
+	elseif string.find(url, "codeberg.org") then
+		url_format = util.formats.codeberg
+	end
 
-	vim.fn.setreg("*", url)
+	url = string.format(url_format, url, commit, relative_file, line_numbers)
+
+	vim.fn.setreg("+", url)
 	print(url)
 end
 

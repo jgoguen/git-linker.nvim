@@ -1,4 +1,12 @@
-local M = {}
+local M = {
+	formats = {
+		github = "https://%s/blob/%s/%s#%s",
+		codeberg = "https://%s/src/commit/%s/%s#%s",
+	},
+}
+
+M.formats["forgejo"] = M.formats["codeberg"]
+M.formats["gitea"] = M.formats["codeberg"]
 
 ---Get the commit hash of the current branch, or upstream main/master if the
 --current branch isn't pushed to origin.
