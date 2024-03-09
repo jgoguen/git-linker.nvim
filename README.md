@@ -21,7 +21,7 @@ Installation with [lazy.nvim](https://github.com/folke/lazy.nvim) is supported:
 
 ```lua
 return {
-  url = 'https://codeberg.org/jgoguen/git-linker.nvim',
+ 'jgoguen/git-linker.nvim',
   opts = {
     print_url = false,
   }
